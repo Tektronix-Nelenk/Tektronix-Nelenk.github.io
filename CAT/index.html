@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAT</title>
+    <link rel="icon" type="image/jpeg" href="image/images (7).jpeg"> <!-- 設定 favicon -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            background: url('image/588363427a3b3db8f4569f205c51ef85.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 3s ease-in-out;
+        }
+        .button {
+            background: url('image/1741429630742.png') no-repeat center center;
+            background-size: contain;
+            width: 10vw;
+            height: 10vw;
+            border: none;
+            cursor: pointer;
+            transition: opacity 1s ease-in-out;
+        }
+        .circle {
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            border-radius: 50%;
+            background-size: cover;
+            opacity: 0;
+            transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <button class="button" onclick="activateEffect()"></button>
+    <audio id="audio" src="image/videoplayback.m4a" loop></audio> <!-- 音樂元件 -->
+
+    <script>
+        function activateEffect() {
+            const button = document.querySelector('.button');
+            const body = document.body;
+            const audio = document.getElementById('audio');
+
+            // 按鈕淡出並移除
+            button.style.opacity = '0';
+            setTimeout(() => button.remove(), 1000);
+
+            // 背景變黑
+            body.style.background = 'black';
+
+            // 播放音樂，並設為重複播放
+            audio.play();
