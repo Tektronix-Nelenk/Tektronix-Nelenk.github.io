@@ -4,7 +4,7 @@
 `validator.js` is a tool designed to check HTML, CSS, and JS. It can identify errors in these codes, which are displayed in the console for review and debugging purposes.
 
 ### Copyright
-The license used in this repository is MTI license. Plagiarism is prohibited.
+The license used in this repository is MIT license. Plagiarism is prohibited.
 
 ### Feature Table
 Below is an overview of supported functionalities for specific modules:
