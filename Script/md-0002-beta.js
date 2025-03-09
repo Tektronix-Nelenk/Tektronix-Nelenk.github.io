@@ -96,7 +96,7 @@ class CodeValidator {
 }
 
 // Initialize the code validator
-const validator = new CodeValidator("Md-0001");
+const validator = new CodeValidator("Md-0002-beta");
 
 // Run validation when the page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
