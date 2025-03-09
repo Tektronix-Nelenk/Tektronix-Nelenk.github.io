@@ -9,4 +9,5 @@ Below is an overview of supported functionalities for specific modules:
 |         | HTML | CSS | JS  | php | Run? |
 |---------|------|-----|------|-----|------|
 | md-0001 |  ✓ | ✓  | ✓   | ×   |  ✓  |
-| md-0002 |  ? | ?  | ?   | ?  |  0/4/2025  |
+| md-0002-beta |  ✓ | ✓  | ✓   | ✓  |  ✓  |
+| md-0002 |  ? | ?  | ?   | ?   |  ×  |
