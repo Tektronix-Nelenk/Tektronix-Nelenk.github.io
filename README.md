@@ -18,4 +18,10 @@ Below is an overview of supported functionalities for specific modules:
 |---------|------|-----|------|-----|------|
 | md-0001 |  ✓ | ✓  | ✓   | ×   |  ✓  |
 | md-0002-beta |  ✓ | ✓  | ✓   | ✓  |  ✓  |
-| md-0002 |  ? | ?  | ?   | ?   |  ×  |
+| md-0002 |  ✓ | ✓  | ✓   | ✓   |  ✓  |
+
+### Update or enhance  
+md-0001 Original version  
+md-0002-deta Add PHP code check  
+md-0002 Optimization  
+
