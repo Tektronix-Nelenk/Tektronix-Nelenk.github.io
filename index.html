@@ -1,128 +1,65 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tektronix Profile</title>
-    <link rel="icon" href="image/avatar.jpg" type="image/x-icon"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
-
-        body {
-            font-family: 'M PLUS Rounded 1c', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            color: #333;
-            overflow: hidden;
-            position: relative;
-            background: url('image/background.gif') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .wave-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .wave {
-            position: absolute;
-            width: 200%;
-            height: 100%;
-            top: -75px;
-            left: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMDAiIHZpZXdCb3g9IjAgMCAxMjgwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNLTczLjMgMTQwLjUgQy0xMzkuNjkgMTMyLjg1IC0yMTUuODQgMTIwLjkgLTI3Ny40MiA5MUMtMzU5LjI3IDYxLjY2IC00MzIuNTIgMjQuNDIgLTUwMS40Mi0xQy01ODIuNDYtMzIuMDUgLTY1OC40NS01MS4wMyAtNzQwLjE4LTgyQy04MTQuOTktMTEwLjk5IC04OTAuNjgtMTU5Ljk1IC05NzguMzctMjAzLjg3Qy0xMDY5LjQ2LTIzOC4xNSAtMTE3Ny4yNC00ODMuODQgLTEyNjUuOC01NTguNzhDLTEzNTMuNTItNjMyLjg3IC0xNDEzLjctNzM0LjQyIC0xNTEyLjctNjgzLjM2IiBzdHJva2Utd2lkdGg9IjAiIGZpbGw9IiNlNTZlNTAiLz4KPC9zdmc+Cg==') repeat-x;
-            background-size: cover;
-            animation: wave-animation 10s linear infinite;
-        }
-
-        @keyframes wave-animation {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0);
-            border-radius: 10px;
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: block;
-            border: 3px solid White;
-        }
-        .profile-name {
-            font-size: 28px;
-            margin: 15px 0;
-            color: White;
-        }
-        .profile-bio {
-            font-size: 16px;
-            color: White;
-            margin-bottom: 20px;
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1px;
-        }
-        .social-links a {
-            text-decoration: none;
-            color: #fff;
-            background-color: black;
-            padding: 10px 10px;
-            border-radius: 50px;
-            transition: background-color 0.3s;
-        }
-        .social-links a:hover {
-            background-color: #005580;
-        }
-    </style>
+    <title>MD-VD.js - Official Site</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="wave-container">
-        <div class="wave"></div>
-    </div>
-    <div class="container">
-        <img src="image/avatar.jpg" alt="頭像" class="profile-img">
-        <h2 class="profile-name">Tektronix</h2>
-        <p class="profile-bio">Lua creation</p>
-        <div class="social-links">
-            <a href="https://scriptblox.com/u/Tektronix">Scriptblox</a>
-            <a href="https://www.roblox.com/users/7313173302/profile">Roblox</a>
-            <a href="https://discord.gg/3BBnhzHxf9">discord</a>
+
+    <header>
+        <div class="logo">MD-VD.js</div>
+        <nav>
+            <a href="#versions">Versions</a>
+            <a href="#usage">How to Use</a>
+            <a href="#changelog">Changelog</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MD-VD.js - The Ultimate Code Validator</h1>
+            <p>Validate **HTML, CSS, JavaScript, and PHP** with a powerful and efficient tool.</p>
+            <a href="#usage" class="btn">Get Started</a>
         </div>
-    </div>
+    </section>
+
+    <section id="versions" class="versions">
+        <h2>Available Versions</h2>
+        <div class="version-list">
+            <div class="version-card">🔹 <b>MD-0001.js</b> - Initial Release</div>
+            <div class="version-card">🔹 <b>MD-0002-beta.js</b> - Added PHP Validation</div>
+            <div class="version-card">🔹 <b>MD-0002.js</b> - Optimized Performance</div>
+        </div>
+    </section>
+
+    <section id="usage" class="usage">
+        <h2>How to Use</h2>
+        <p>Simply include the script in your webpage:</p>
+        <div class="code-container">
+            <pre class="code-box">
+&lt;script src="https://tektronix-nelenk.github.io/Script/md-0002.js"&gt;&lt;/script&gt;
+            </pre>
+        </div>
+    </section>
+
+    <section id="changelog" class="changelog">
+        <h2>Changelog</h2>
+        <p>🚀 Version 0002 - Optimized performance and fixed bugs</p>
+        <p>⚡ Version 0002-beta - Added PHP validation</p>
+        <p>🔧 Version 0001 - Initial release</p>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact & Support</h2>
+        <p>For issues and support, visit our <a href="https://github.com/Tektronix-Nelenk">GitHub</a>.</p>
+    </section>
+
+    <footer>
+        <p>© 2025 MD-VD.js | Designed for Developers</p>
+    </footer>
+
 </body>
 </html>
