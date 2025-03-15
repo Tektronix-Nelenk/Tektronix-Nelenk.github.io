@@ -19,7 +19,11 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # 使用最新穩定的 LTS 版本
+        node-version: '20'
+
+    - name: Create package.json
+      run: |
+        echo '{}' > package.json
 
     - name: Install dependencies
       run: npm install
