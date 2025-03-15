@@ -1,0 +1,54 @@
+name: Add Secret Keys to Files
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  add_keys:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Load Environment Variables
+        run: |
+          HTML_KEY=$(grep '^HTML_KEY=' .env | cut -d '=' -f2)
+          CSS_KEY=$(grep '^CSS_KEY=' .env | cut -d '=' -f2)
+          JAVASCRIPT_KEY=$(grep '^JAVASCRIPT_KEY=' .env | cut -d '=' -f2)
+          PHP_KEY=$(grep '^PHP_KEY=' .env | cut -d '=' -f2)
+
+          [[ $HTML_KEY =~ ^[0-9]{6}H$ ]] || { echo "Invalid HTML_KEY format"; exit 1; }
+          [[ $CSS_KEY =~ ^[0-9]{6}C$ ]] || { echo "Invalid CSS_KEY format"; exit 1; }
+          [[ $JAVASCRIPT_KEY =~ ^[0-9]{6}J$ ]] || { echo "Invalid JAVASCRIPT_KEY format"; exit 1; }
+          [[ $PHP_KEY =~ ^PHP-[0-9]{6}P$ ]] || { echo "Invalid PHP_KEY format"; exit 1; }
+
+          echo "HTML_KEY=$HTML_KEY" >> $GITHUB_ENV
+          echo "CSS_KEY=$CSS_KEY" >> $GITHUB_ENV
+          echo "JAVASCRIPT_KEY=$JAVASCRIPT_KEY" >> $GITHUB_ENV
+          echo "PHP_KEY=$PHP_KEY" >> $GITHUB_ENV
+
+      - name: Add Keys to Files
+        run: |
+          for file in $(git ls-files '*.html' '*.css' '*.js' '*.php'); do
+            case "$file" in
+              *.html) key=$HTML_KEY ;;
+              *.css) key=$CSS_KEY ;;
+              *.js) key=$JAVASCRIPT_KEY ;;
+              *.php) key=$PHP_KEY ;;
+            esac
+            echo -e "\n<!-- Secret Key: $key -->" >> "$file"
+          done
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Added secret keys to files" || exit 0
+          git push
