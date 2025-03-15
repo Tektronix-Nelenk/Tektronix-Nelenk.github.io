@@ -47,8 +47,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "Tektronix-Nelenk"
+          git config --global user.email "125435yhgt@gmail.com"
           git add .
           git commit -m "Added secret keys to files" || exit 0
           git push
