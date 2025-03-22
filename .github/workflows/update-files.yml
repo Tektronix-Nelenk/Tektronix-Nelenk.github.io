@@ -2,7 +2,7 @@ name: Update File List
 
 on:
   schedule:
-    - cron: '0 * * * *' # 每小時更新一次
+    - cron: '0 * * * *'  # 每小時執行一次
   workflow_dispatch:
 
 jobs:
@@ -27,5 +27,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add files.json
           git commit -m "Update file list" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Tektronix-Nelenk/Tektronix-Nelenk.github.io.git
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Tektronix-Nelenk/Tektronix-Nelenk.github.io.git HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         continue-on-error: true
