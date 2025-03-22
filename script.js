@@ -1,52 +1,53 @@
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("https://Tektronix-Nelenk.github.io/files.json")
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById("file-list");
-            renderFileTree(data, container);
-        })
-        .catch(error => console.error("Error loading file list:", error));
-});
+const GITHUB_TOKEN = "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"; // ⚠️ 在這裡填入你的 Token
 
-function renderFileTree(files, container) {
-    container.innerHTML = "";
-    const fileMap = {};
-
-    files.forEach(file => {
-        const parts = file.path.split("/");
-        let current = fileMap;
-
-        parts.forEach((part, index) => {
-            if (!current[part]) {
-                current[part] = index === parts.length - 1 ? file : {};
+async function fetchFiles(directory, container) {
+    const url = `https://api.github.com/repos/Tektronix-Nelenk/Tektronix-Nelenk.github.io/contents/${directory}?ref=main`;
+    try {
+        const response = await fetch(url, {
+            headers: {
+                "Authorization": `token ${GITHUB_TOKEN}`
             }
-            current = current[part];
         });
-    });
 
-    function createListItems(obj, parentElement) {
-        Object.keys(obj).forEach(key => {
-            const item = document.createElement("div");
-            item.classList.add("file-item");
+        if (!response.ok) throw new Error(`Failed to load: ${response.status}`);
+        const data = await response.json();
 
-            if (typeof obj[key] === "object" && !obj[key].download_url) {
-                item.innerHTML = `<span class="folder">📁 ${key}</span>`;
-                const subList = document.createElement("div");
-                subList.classList.add("nested");
-                item.appendChild(subList);
+        const folders = data.filter(item => item.type === "dir");
+        const files = data.filter(item => item.type === "file");
 
-                item.querySelector(".folder").addEventListener("click", function () {
-                    subList.classList.toggle("active");
-                });
+        for (const folder of folders) {
+            const folderContainer = document.createElement("div");
+            folderContainer.classList.add("folder");
+            folderContainer.innerHTML = `📁 ${folder.name}`;
 
-                createListItems(obj[key], subList);
-            } else {
-                item.innerHTML = `<a href="${obj[key].download_url}" target="_blank">📄 ${key}</a>`;
-            }
+            const subContainer = document.createElement("div");
+            subContainer.classList.add("subfolder");
 
-            parentElement.appendChild(item);
-        });
+            folderContainer.addEventListener("click", () => {
+                subContainer.style.display = subContainer.style.display === "none" ? "block" : "none";
+            });
+
+            container.appendChild(folderContainer);
+            container.appendChild(subContainer);
+            await fetchFiles(folder.path, subContainer);
+        }
+
+        for (const file of files) {
+            const fileLink = document.createElement("a");
+            fileLink.href = file.download_url;
+            fileLink.textContent = `📄 ${file.name}`;
+            fileLink.classList.add("file");
+            fileLink.target = "_blank";
+            container.appendChild(fileLink);
+        }
+    } catch (error) {
+        console.error(`Error fetching ${directory}:`, error);
+        container.innerHTML = `<span style="color: red;">error ${directory}</span>`;
     }
-
-    createListItems(fileMap, container);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("file-list");
+    container.innerHTML = "";
+    fetchFiles("script", container);
+});
