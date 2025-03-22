@@ -1,4 +1,4 @@
-const GITHUB_TOKEN = "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"; // ⚠️ 在這裡填入你的 Token
+const GITHUB_TOKEN = "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"; // ⚠️ 在這裡填入的 ken
 
 async function fetchFiles(directory, container) {
     const url = `https://api.github.com/repos/Tektronix-Nelenk/Tektronix-Nelenk.github.io/contents/${directory}?ref=main`;
