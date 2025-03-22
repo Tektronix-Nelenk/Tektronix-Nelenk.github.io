@@ -3,8 +3,10 @@
 # Tn Script
 Provide Roblox scripts, allowing you to do whatever you want in the game.  
 
-# Get Script
+# Get Script  
 [Tektronix-Nelenk.github.io](https://Tektronix-Nelenk.github.io)  
+or  
+[Scripts folder](./script)
 
 # Provide script
 Please contact email  
