@@ -1,48 +1,66 @@
+
+/* 黑色主題 */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
-    color: white;
-    margin: 20px;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 高度佔滿整個視窗 */
 }
 
-h1 {
-    text-align: center;
-}
-
-#file-list {
+/* 中心容器樣式 */
+.container {
     max-width: 600px;
-    margin: auto;
     background: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    text-align: center; /* 確保內容置中 */
 }
 
-.file-item {
-    margin: 5px 0;
-    padding: 5px;
-    border-radius: 4px;
+/* 圖片居中樣式 */
+.center-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
+/* 資料夾樣式 */
 .folder {
     cursor: pointer;
-    font-weight: bold;
+    padding: 8px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: background 0.3s;
 }
 
-.nested {
-    display: none;
-    margin-left: 20px;
+.folder:hover {
+    background: #3a3a3a;
 }
 
-.nested.active {
+/* 檔案樣式 */
+.file {
     display: block;
-}
-
-a {
+    padding: 5px;
+    margin-left: 20px;
     text-decoration: none;
-    color: #4fc3f7;
+    color: #4fa3ff;
+    transition: color 0.3s;
 }
 
-a:hover {
-    color: #81d4fa;
+.file:hover {
+    color: #82c1ff;
+    text-decoration: underline;
+}
+
+/* 隱藏子資料夾 */
+.subfolder {
+    margin-left: 20px;
+    display: none;
 }
