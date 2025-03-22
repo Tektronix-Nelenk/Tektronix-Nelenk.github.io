@@ -18,5 +18,9 @@ content:(Script content)
 # Copyright
 This repository is licensed under the [MIT license](./LICENSE), so modification is prohibited.
 
+# contents
+Using json  
+[Here](https://api.github.com/repos/Tektronix-Nelenk/Tektronix-Nelenk.github.io/contents/script)  
+
 # Number of visits
 ![Visitor Count](https://counter4.optistats.ovh/private/freecounterstat.php?c=ksgx1sjt45gj2fnjd3s8c7rygjsknttd)
