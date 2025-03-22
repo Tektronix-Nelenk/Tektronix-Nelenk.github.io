@@ -29,7 +29,8 @@ jobs:
           git add files.json
           git commit -m "Update file list" || echo "No changes to commit"
 
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/Tektronix-Nelenk/Tektronix-Nelenk.github.io.git HEAD:main
+          # 使用 PAT_TOKEN 進行推送
+          git push https://Tektronix-Nelenk:${{ secrets.PAT_TOKEN }}@github.com/Tektronix-Nelenk/Tektronix-Nelenk.github.io.git HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         continue-on-error: true
