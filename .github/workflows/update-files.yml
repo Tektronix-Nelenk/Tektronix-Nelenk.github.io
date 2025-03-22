@@ -1,0 +1,43 @@
+name: Update File List
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小時更新一次
+  workflow_dispatch: # 允許手動觸發
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch File List
+        run: |
+          echo "Fetching files from GitHub API..."
+          
+          # 定義 GitHub API 請求函式（遞迴抓取所有檔案與資料夾）
+          get_files() {
+            local path="$1"
+            local response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                                 -H "Accept: application/vnd.github.v3+json" \
+                                 "https://api.github.com/repos/Tektronix-Nelenk/Tektronix-Nelenk.github.io/contents/$path?ref=main")
+            echo "$response" | jq '.[] | {name: .name, path: .path, type: .type, download_url: .download_url}' >> files.json
+            echo "$response" | jq -r '.[] | select(.type == "dir") | .path' | while read subdir; do
+              get_files "$subdir"
+            done
+          }
+
+          # 初始化 JSON 檔案
+          echo "[" > files.json
+          get_files "script"
+          echo "]" >> files.json
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add files.json
+          git commit -m "Update file list" || echo "No changes to commit"
+          git push
+        continue-on-error: true
