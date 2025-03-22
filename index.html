@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tn script git</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 5px 0; cursor: pointer; color: blue; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; white-space: pre-wrap; }
+    </style>
 </head>
-
 <body>
-  
-</body>
+    <ul id="file-list"></ul>
+    <pre id="file-content"></pre>
 
+    <script>
+        const owner = "tektronix-nelenk"; // 例如 "myusername"
+        const repo = "tektronix-nelenk.github.io"; // 例如 "myrepository"
+        const path = "script"; // 資料夾名稱
+        const branch = "main"; // 或 "master"
+
+        async function loadFiles() {
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+            const response = await fetch(url);
+            const files = await response.json();
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            files.forEach(file => {
+                if (file.type === "file") {
+                    const li = document.createElement('li');
+                    li.textContent = file.name;
+                    li.onclick = () => loadFileContent(file.path);
+                    fileList.appendChild(li);
+                }
+            });
+        }
+
+        async function loadFileContent(filePath) {
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            const content = atob(data.content); // Base64 轉換
+            document.getElementById('file-content').textContent = content || 'Read Error';
+        }
+
+        loadFiles();
+    </script>
+</body>
 </html>
