@@ -1,63 +1,93 @@
-/* 黑色主題 */
+/* 全局樣式 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    background: linear-gradient(120deg, #121212, #1e1e1e); /* 背景漸變效果 */
+    color: #e0e0e0; /* 柔和的文字顏色 */
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    height: 100vh; /* 滿窗高度 */
+    overflow: hidden; /* 隱藏滾動條 */
 }
 
 /* 容器樣式 */
 .container {
     max-width: 600px;
-    margin: auto;
-    background: #1e1e1e;
+    width: 90%;
+    background: linear-gradient(135deg, #1e1e1e, #2a2a2a); /* 添加漸變背景 */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-radius: 12px; /* 柔和圓角 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 深色陰影效果 */
+    text-align: center;
 }
 
-/* 資料夾樣式 */
+/* 圖片樣式 */
+.center-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 10px; /* 圓角圖片效果 */
+}
+
+/* 文件夾樣式 */
 .folder {
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
     background: #2a2a2a;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 5px 0;
-    transition: background 0.3s, transform 0.3s;
+    transition: background 0.3s ease, transform 0.3s ease; /* 背景和大小的過渡 */
+    animation: smooth-appear 0.5s ease-out; /* 文件夾漸入動畫 */
 }
 
 .folder:hover {
     background: #3a3a3a;
-    transform: scale(1.02); /* 輕微放大效果 */
-}
-
-/* 子資料夾樣式 */
-.subfolder {
-    margin-left: 20px;
-    display: none; /* 預設為隱藏 */
-    overflow: hidden; /* 確保展開時內容正常顯示 */
-    transition: all 0.3s ease; /* 加入平滑展開效果 */
-}
-
-/* 子資料夾展開效果 */
-.subfolder.visible {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    transform: scale(1.1); /* 放大效果 */
 }
 
 /* 文件樣式 */
 .file {
     display: block;
-    padding: 5px;
-    margin-left: 20px;
+    padding: 8px;
     text-decoration: none;
     color: #4fa3ff;
-    transition: color 0.3s;
+    font-weight: bold;
+    transition: color 0.3s ease, background-color 0.3s ease; /* 顏色平滑過渡 */
 }
 
 .file:hover {
-    color: #82c1ff;
-    text-decoration: underline;
+    color: #82c1ff; /* Hover 顏色效果 */
+    background-color: #2a2a2a; /* 背景變化 */
+    border-radius: 6px; /* 輕微圓角 */
+}
+
+/* 子資料夾展開動畫 */
+.subfolder {
+    margin-left: 20px;
+    max-height: 0; /* 初始高度為 0 */
+    opacity: 0; /* 初始透明度 */
+    overflow: hidden; /* 防止內容溢出 */
+    transform-origin: top; /* 從頂部展開 */
+    transition: max-height 0.4s ease, opacity 0.4s ease; /* 平滑動畫效果 */
+}
+
+.subfolder.visible {
+    max-height: 1000px; /* 展開高度 */
+    opacity: 1; /* 透明度漸變到完全可見 */
+}
+
+/* 出現動畫：文件夾的透明度從 0 到 1 */
+@keyframes smooth-appear {
+    0% {
+        transform: scale(0.95); /* 輕微縮小 */
+        opacity: 0; /* 完全透明 */
+    }
+    100% {
+        transform: scale(1); /* 恢復大小 */
+        opacity: 1; /* 完全可見 */
+    }
 }
