@@ -1,1 +1,22 @@
-# Tektronix-Nelenk.github.io
+![logo](image/logo.png)
+---
+# Tn Script
+Provide Roblox scripts, allowing you to do whatever you want in the game.  
+
+# Get Script
+[Tektronix-Nelenk.github.io](https://Tektronix-Nelenk.github.io)  
+
+# Provide script
+Please contact email  
+[coder4819@gmail.com](mailto:coder4819@gmail.com) 
+
+Document Format:  
+Recipient:coder4819@gmail.com  
+Subject:Script provided  
+content:(Script content)  
+
+# Copyright
+This repository is licensed under the [MIT license](./LICENSE), so modification is prohibited.
+
+# Number of visits
+![Visitor Count](https://counter4.optistats.ovh/private/freecounterstat.php?c=ksgx1sjt45gj2fnjd3s8c7rygjsknttd)
