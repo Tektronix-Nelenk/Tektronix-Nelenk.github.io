@@ -1,39 +1,23 @@
-const protectedUrl = "https://coder.ct.ws/GITHUB_TOKEN"; // 您的公開鏈接
-
-const REPO_OWNER = "Tektronix-Nelenk";
-const REPO_NAME = "Tektronix-Nelenk.github.io";
-const DIRECTORY = "script";
+// URL 返回 JSON 格式的公開數據
+const jsonUrl = "https://coder.ct.ws/GITHUB_TOKEN/files.json";
 
 document.addEventListener("DOMContentLoaded", async function () {
     const container = document.getElementById("file-list");
     container.innerHTML = `<span style="color: blue;">Loading...</span>`;
 
     try {
-        // 獲取公開的 GitHub Token
-        const tokenResponse = await fetch(protectedUrl);
-        if (!tokenResponse.ok) {
-            throw new Error(` ${tokenResponse.status}`);
+        // 發送請求並接收 JSON 數據
+        const response = await fetch(jsonUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const GITHUB_TOKEN = await tokenResponse.text(); // 讀取 Token 文本
-
-        // 使用 Token 訪問 GitHub API
-        const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DIRECTORY}`;
-        const filesResponse = await fetch(apiUrl, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN.trim()}` // 使用獲取的 Token
-            }
-        });
-
-        if (!filesResponse.ok) {
-            throw new Error(` ${filesResponse.status}`);
-        }
-
-        const filesData = await filesResponse.json();
+        // 解析 JSON 數據
+        const jsonData = await response.json();
         container.innerHTML = ""; // 清除 Loading 提示
 
-        // 渲染文件列表
-        filesData.forEach(item => {
+        // 遍歷 JSON 數據並渲染到頁面
+        jsonData.forEach(item => {
             if (item.type === "dir") {
                 createFolderElement(item.name, item.path, container);
             } else if (item.type === "file") {
@@ -41,8 +25,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
     } catch (error) {
-        console.error("", error);
-        container.innerHTML = `<span style="color: red;"></span>`;
+        console.error("錯誤：", error);
+        container.innerHTML = `<span style="color: red;">無法加載 JSON 數據。</span>`;
     }
 });
 
@@ -58,7 +42,7 @@ function createFolderElement(name, path, parentContainer) {
     folderContainer.addEventListener("click", () => {
         subContainer.classList.toggle("visible");
         if (subContainer.classList.contains("visible") && subContainer.childElementCount === 0) {
-            fetchSubfolderFiles(path, subContainer);
+            console.log(`展開資料夾：${path}`); // 打印資料夾路徑
         }
     });
 
@@ -74,32 +58,4 @@ function createFileElement(name, downloadUrl, parentContainer) {
     fileLink.classList.add("file");
     fileLink.target = "_blank"; // 在新標籤中打開文件
     parentContainer.appendChild(fileLink);
-}
-
-// 加載子資料夾文件
-async function fetchSubfolderFiles(path, parentContainer) {
-    const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
-    try {
-        const response = await fetch(apiUrl, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN.trim()}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(` ${response.status}`);
-        }
-
-        const data = await response.json();
-        data.forEach(item => {
-            if (item.type === "dir") {
-                createFolderElement(item.name, item.path, parentContainer);
-            } else if (item.type === "file") {
-                createFileElement(item.name, item.download_url, parentContainer);
-            }
-        });
-    } catch (error) {
-        console.error("", error);
-        parentContainer.innerHTML = `<span style="color: red;"></span>`;
-    }
 }
