@@ -1,16 +1,55 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tn script git</title>
-    <link rel="stylesheet" href="style.css"> <!-- 引入 CSS -->
+    <title>loading</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #image {
+            width: 0;
+            height: auto;
+            opacity: 0;
+            transition: width 1s cubic-bezier(0.42, 0, 0.58, 1), 
+                        opacity 1s ease-in-out;
+        }
+
+        #image.expand {
+            width: 50vw; 
+            opacity: 1;
+        }
+
+        #image.shrink {
+            width: 0;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
-   <div class="container">
-    <img src="image/index-logo.png" alt="Logo" class="center-image">
-    <div id="file-list">Loading...</div>
-   </div>
-    <script src="script.js"></script> <!-- 引入 JavaScript -->
+    <img id="image" src="image/new-logo.png" alt="load-logo">
+    <script>
+        const image = document.getElementById('image');
+        
+        setTimeout(() => {
+            image.classList.add('expand');
+        }, 100);
+
+        setTimeout(() => {
+            image.classList.remove('expand');
+            image.classList.add('shrink');
+        }, 1100);
+
+        setTimeout(() => {
+            window.location.href = 'home.html';
+        }, 2100);
+    </script>
 </body>
 </html>

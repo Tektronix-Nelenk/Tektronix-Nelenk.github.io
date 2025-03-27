@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     } catch (error) {
         console.error("錯誤：", error);
-        container.innerHTML = `<span style="color: red;">無法加載 JSON 數據。</span>`;
+        container.innerHTML = `<span style="color: red;"></span>`;
     }
 });
 
@@ -42,7 +42,7 @@ function createFolderElement(name, path, parentContainer) {
     folderContainer.addEventListener("click", () => {
         subContainer.classList.toggle("visible");
         if (subContainer.classList.contains("visible") && subContainer.childElementCount === 0) {
-            console.log(`展開資料夾：${path}`); // 打印資料夾路徑
+            console.log(`${path}`); // 打印資料夾路徑
         }
     });
 
