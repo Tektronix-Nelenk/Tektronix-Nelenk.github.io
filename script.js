@@ -1,5 +1,5 @@
 // URL 返回 JSON 格式的公開數據
-const jsonUrl = "https://coder.ct.ws/GITHUB_TOKEN/files.json";
+const jsonUrl = "https://coder.ct.ws/GITHUB_TOKEN/index.php";
 
 document.addEventListener("DOMContentLoaded", async function () {
     const container = document.getElementById("file-list");
